@@ -1,5 +1,6 @@
 const { post } = require('../routes/api');
 const User = require('./User');
+const Item = require('./Item')
 
 
 Item.belongsTo(Post,
@@ -10,5 +11,5 @@ Item.belongsTo(Post,
 )
 
 module.exports = {
-  User
+  User,
 };
