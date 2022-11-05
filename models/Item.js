@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 
-const sequelize = require('../../db/config');
+const sequelize = require('../db/config');
 
 class Item extends Model {}
 
@@ -36,7 +36,7 @@ Item.init(
     },
     condition:{
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     user_id: {
         type: DataTypes.INTEGER,

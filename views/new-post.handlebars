@@ -1,0 +1,38 @@
+<div class="card">
+    <h3 class="card-header">Create New Listing</h3>
+    <form class="card-body new-post-form" id="new-post-form">
+
+        {{!-- user inputs name of item to be sold --}}
+        <label for="post-title" class="form-label">Item:</label>
+        <input type="text" id="post-title" name="post-title" class="form-input" />
+
+        {{!-- user inputs description of item --}}
+        <label class="form-label" for="content">Description of Item:</label>
+        <input id="content" name="content" class="form-input" />
+
+        {{!-- user uploads image of item --}}
+        <label for="url">Enter your image URL:</label>
+        <input type="url" name="url" id="url"
+            placeholder="https://example.com"
+            pattern="https://.*" size="30"
+            required>
+
+        {{!-- user inputs price of item --}}
+        <label class="price-label" for="price">Price of Item:</label>
+        <input id="price" name="price" class="form-input" />
+
+        {{!-- user selects a category that the item falls under from dropdown menu --}}
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Categories
+            </button>
+            <div class="dropdown-menu" id="dropdownMenuCategories" aria-labelledby="dropdownMenuButton">
+            </div>
+        </div>
+
+        {{!-- user clicks button to list item --}}
+        <button type="submit" class="btn">List Item</button>
+    </form>
+</div>
+
+<script src="js/new-post.js"></script>
