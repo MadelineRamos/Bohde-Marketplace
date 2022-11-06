@@ -1,0 +1,19 @@
+<article class="post">
+  <div class="title">
+    <a href="/post/{{post_id}}">{{title}}</a>
+    <span>{{price}}</span>
+    <p>Listed by {{user.username}} on {{format_date created_at}}</p>
+  </div>
+  <div class="meta">
+    <p>Photos:</p>
+    <img src="{{image_url}}" />
+    |
+    <span>Description: {{description}}</span>
+  </div>
+  {{#if loggedIn}}
+  <div class="buy-btns">
+    <button type="button" class="add-to-cart-btn">Add to cart</button>
+    <button type="button" class="buy-now-btn">Buy now</button>
+  </div>
+  {{/if}}
+</article>

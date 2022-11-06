@@ -1,0 +1,15 @@
+{{#each post}}
+<article class="post">
+  <div class="title">
+    <a href="/post/{{post_id}}">{{title}}</a>
+    <span>{{price}}</span>
+  </div>
+  <div class="meta">
+    <img src="{{image_url}}">
+    |
+    Listed by {{user.username}} on {{format_date created_at}}
+  </div>
+  <button type="button" class="add-to-cart-btn">Add to cart</button>
+  <button type="button" class="buy-now-btn">Buy now</button>
+</article>
+{{/each}}
