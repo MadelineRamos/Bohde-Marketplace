@@ -33,7 +33,7 @@ router.put('/:id', (req, res) => {
 
 //buy an item
 router.put('/:id', (req, res) => {
-    set revenue = { post.price }
+// update seller's balance (sum)
     Post.update(
         {
             Balance: req.body.balance
@@ -43,7 +43,17 @@ router.put('/:id', (req, res) => {
                 price: req.price.id
             },
         }),
-
+//update buyer's balance (subtract)
+    Post.update(
+        {
+            Balance: req.body.balance
+        },
+        {
+            where: {
+                price: req.price.id
+            },
+        }),
+//delete post
     Post.destroy({
             where: {
                 id:req.params.id
