@@ -38,6 +38,11 @@ User.init(
       validate: {
         len: [7]
       }
+    },
+    balance: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 100,
     }
   },
   {
