@@ -1,6 +1,7 @@
 const router = require('express').Router();
-const { post } = require('.');
-const { Item, Price, Category, Image, Description, Condition, UserID, User } = require('../../models')
+const { Post } = require('.');
+const sequelize = require('../../db/config');
+const { Category, Post, User } = require('../../models')
 
 
 // router.get all items
@@ -32,22 +33,23 @@ router.put('/:id', (req, res) => {
 
 //buy an item
 router.put('/:id', (req, res) => {
-
-    Post.destroy({
-            where: {
-                id:req.params.id
-            },
-        }),
-    User.update(
+    set revenue = { post.price }
+    Post.update(
         {
             Balance: req.body.balance
         },
         {
             where: {
-                balance: req.params.id
+                price: req.price.id
+            },
+        }),
+
+    Post.destroy({
+            where: {
+                id:req.params.id
             },
         })
-    .then(dbPostData => {
+.then(dbPostData => {
         if (!dbPostData) {
             res.status(404).json({ message: 'No Post found with this id' });
             return;
