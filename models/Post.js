@@ -13,7 +13,7 @@ Post.init(
         autoIncrement: true,
     },
     //from user
-    user_id: {
+    seller_id: {
         type: DataTypes.INTEGER,
         references: {
             model: "user",

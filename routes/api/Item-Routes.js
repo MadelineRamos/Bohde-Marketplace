@@ -1,6 +1,7 @@
 const router = require('express').Router();
-const { post } = require('.');
-const { Item, Price, Category, Image, Description, Condition, UserID, User } = require('../../models')
+const { Post } = require('.');
+const sequelize = require('../../db/config');
+const { Category, Post, User } = require('../../models')
 
 
 // router.get all items
@@ -44,8 +45,8 @@ router.put('/:id', (req, res) => {
             },
             {
                 where: {
-                    id: req.params.id
-                }
+                    balance: req.params.id
+                },
             })
             .then(dbPostData => {
                 if (!dbPostData) {
