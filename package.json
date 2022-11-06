@@ -23,5 +23,13 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MadelineRamos/Bohde-Marketplace.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MadelineRamos/Bohde-Marketplace/issues"
+  },
+  "homepage": "https://github.com/MadelineRamos/Bohde-Marketplace#readme"
 }

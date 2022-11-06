@@ -53,7 +53,13 @@ router.post('/', (req, res) => {
        discription: req.body.discription, 
        condition: req.body.condition, 
        user_id: req.body.user_id, 
-        image_url: req.body.image_url, 
+       image_url: req.body.image_url,
+       include: [
+        {
+            model: User,
+            attributes: ["lastName", 'firstName'],
+          },
+       ]
    })
    .then((item) => {
        res.status(200).json(item);
