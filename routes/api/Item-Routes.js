@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { post } = require('.');
-const { Item, User, Category } = require('../../models')
+const { Item, Price, Category, Image, Description, Condition, UserID, User, Post } = require('../../models')
 
 
 // router.get all items
@@ -70,6 +70,32 @@ router.post('/', (req, res) => {
    })
 });
 
+router.post('/', (req, res) => {
+    Post.create({
+        post_id: req.body.id,
+        user_id: req.body.user_id,
+        balance: req.body.balance,
+        title: req.body.title,
+        price: req.body.price,
+        category_id: req.body.category_id,
+        image_url: req.body.image_url,
+        description: req.body.description,
+        include: [
+            {
+                model: User,
+                attributes: ["lastName", 'firstName'],
+              },
+           ]
+    })
+    .then((item) => {
+        res.status(200).json(item);
+    })
+    .catch((err) => {
+     console.log(err);
+     res.status(400).json(err);
+    })
+});
+
 //update item price 
 router.put('/:id', (req, res) => {
     Item.update(
@@ -93,15 +119,21 @@ router.put('/:id', (req, res) => {
 
 //buy an item
 router.put('/:id', (req, res) => {
-    Item.update(
+
+    Post.destroy({
+            where: {
+                id:req.params.id
+            },
+        }),
+    User.update(
         {
-            UserId: req.body.UserID
+            Balance: req.body.balance
         },
         {
-        where: {
-            id: req.params.id
-        }
-    })
+            where: {
+                balance: req.params.id
+            },
+        })
     .then(dbPostData => {
         if (!dbPostData) {
             res.status(404).json({ message: 'No Post found with this id' });

@@ -1,6 +1,7 @@
 const { post } = require('../routes/api');
 const User = require('./User');
-const Item = require('./Item');
+const Item= require('./Item');
+const Post = require('./Post');
 const Category = require('./Category');
 
 // Item belongsTo Category
@@ -8,21 +9,22 @@ Item.belongsTo(Category, {
   foreignKey: 'category_id',
   });
 
-// Categories have many Products
+// Categories have many Items
 Category.hasMany(Item, {
   foreignKey: 'category_id',
 });
 
- Item.belongsTo(post,
-   {
-     foreignKey: ('post_id'),
-     onDelete: 'CASCADE'
-   }
- )
+Item.belongsTo(Post,
+  {
+    foreignKey: ('post_id'),
+    onDelete: 'CASCADE'
+  }
+)
+
 
 module.exports = {
   User,
   Item,
+  Post,
   Category
-
 };
