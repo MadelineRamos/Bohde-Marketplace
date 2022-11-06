@@ -20,13 +20,20 @@ Post.init(
             key: "id",
         }
     },
-    //from item
-    price: {
+    balance: {
         type: DataTypes.INTEGER,
         references: {
-            model: "item",
-            key: "price",
-        },
+            model: "user",
+            key: "balance",
+        }
+    },
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    price: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
     },
     category_id: {
         type: DataTypes.INTEGER,
@@ -37,11 +44,11 @@ Post.init(
     },
     image_url: {
         type: DataTypes.STRING,
-        references: {
-            model: "item",
-            key: "image_url",
-        },
     },
+    description: {
+        type: DataTypes.STRING,
+    },
+
 },
 {
     sequelize,

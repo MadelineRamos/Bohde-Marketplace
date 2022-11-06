@@ -5,8 +5,32 @@ const Post = require('../models/Post');
 
 // Get all listings for homepage
 router.get('/', (req, res) => {
+    console.log('======================');
+    Post.findAll({
+        attributes: [
+            'post_id',
+            'user_id',
+            'title',
+            'price',
+            'image_url',
+            'description',
+            'category_id',
+            'created_at'
+        ]
+    })
+        .then(dbPostData => {
+            const posts = dbPostData.map(post => post.get({ plain: true }));
 
-})
+            res.render('homepage', {
+                posts,
+                loggedIn: req.session.loggedIn
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
 
 // Get single listing
 router.get('/post/:id', (req, res) => {
@@ -15,16 +39,14 @@ router.get('/post/:id', (req, res) => {
             id: req.params.id
         },
         attributes: [
-            'id',
+            'post_id',
+            'user_id',
+            'title',
             'price',
+            'image_url',
+            'description',
             'category_id',
             'created_at'
-        ],
-        include: [
-            {
-                model: Item,
-                attributes: ['id', 'title', 'category_id', 'description', 'condition', 'user_id', 'image_url']
-            }
         ]
     })
         .then(dbPostData => {

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { post } = require('.');
-const { Item, Price, Category, Image, Description, Condition, UserID } = require('../../models')
+const { Item, Price, Category, Image, Description, Condition, UserID, User } = require('../../models')
 
 
 // router.get all items
@@ -32,26 +32,32 @@ router.put('/:id', (req, res) => {
 
 //buy an item
 router.put('/:id', (req, res) => {
-    Item.update(
-        {
-            UserId: req.body.UserID
+
+    Post.destroy({
+        where: {
+            id: req.params.id
         },
-        {
-            where: {
-                id: req.params.id
-            }
-        })
-        .then(dbPostData => {
-            if (!dbPostData) {
-                res.status(404).json({ message: 'No Post found with this id' });
-                return;
-            }
-            res.json(dbPostData);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
+    }),
+        User.update(
+            {
+                Balance: req.body.balance
+            },
+            {
+                where: {
+                    id: req.params.id
+                }
+            })
+            .then(dbPostData => {
+                if (!dbPostData) {
+                    res.status(404).json({ message: 'No Post found with this id' });
+                    return;
+                }
+                res.json(dbPostData);
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json(err);
+            });
 });
 
 module.exports = router;
