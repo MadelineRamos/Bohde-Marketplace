@@ -1,9 +1,11 @@
 const router = require('express').Router();
 const { post } = require('.');
-const { Item, Price, Category, Image, Description, Condition, UserID, User, Post } = require('../../models')
+const sequelize = require('../../db/config');
+const { Category, Post, User } = require('../../models')
 
 
 // router.get all items
+// Item has become Post
 router.get('/', (req, res) => {
     Item.findall({
         attributes: ['id', 'title', 'price', 'category_id', 'discription', 'condition','user_id', 'image_url'],
@@ -43,33 +45,7 @@ router.get('/:id', (req, res) => {
       });
   });
 
-// router.post item
-router.post('/', (req, res) => {
-    // create a new Item
-    Item.create({
-       title: req.body.title,
-       price: req.body.price,
-       category_id: req.body.category_id,  
-       discription: req.body.discription, 
-       condition: req.body.condition, 
-       user_id: req.body.user_id, 
-       image_url: req.body.image_url,
-       include: [
-        {
-            model: User,
-            attributes: ["lastName", 'firstName'],
-          },
-       ]
-   })
-   .then((item) => {
-       res.status(200).json(item);
-   })
-   .catch((err) => {
-    console.log(err);
-    res.status(400).json(err);
-   })
-});
-
+//new Post
 router.post('/', (req, res) => {
     Post.create({
         post_id: req.body.id,
@@ -119,22 +95,33 @@ router.put('/:id', (req, res) => {
 
 //buy an item
 router.put('/:id', (req, res) => {
-
-    Post.destroy({
-            where: {
-                id:req.params.id
-            },
-        }),
-    User.update(
+// update seller's balance (sum)
+    Post.update(
         {
             Balance: req.body.balance
         },
         {
             where: {
-                balance: req.params.id
+                price: req.price.id
+            },
+        }),
+//update buyer's balance (subtract)
+    Post.update(
+        {
+            Balance: req.body.balance
+        },
+        {
+            where: {
+                price: req.price.id
+            },
+        }),
+//delete post
+    Post.destroy({
+            where: {
+                id:req.params.id
             },
         })
-    .then(dbPostData => {
+.then(dbPostData => {
         if (!dbPostData) {
             res.status(404).json({ message: 'No Post found with this id' });
             return;

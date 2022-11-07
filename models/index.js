@@ -14,7 +14,7 @@ Category.hasMany(Item, {
   foreignKey: 'category_id',
 });
 
-Item.belongsTo(Post,
+Item.belongsTo(post,
   {
     foreignKey: ('post_id'),
     onDelete: 'CASCADE'
