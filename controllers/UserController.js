@@ -69,5 +69,19 @@ module.exports = {
     } else {
       res.status(404).end();
     }
+  },
+
+  findUser: async (req, res) => {
+    try {
+      const currUser = req.session.currentUser;
+      // const user = await User.findOne({
+      //   where: { email: currUser },
+      //   attributes: { exclude: ['createdAt, updatedAt'] },
+      // });
+      res.json(currUser);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
   }
 }

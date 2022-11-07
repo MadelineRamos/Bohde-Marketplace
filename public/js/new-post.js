@@ -1,18 +1,46 @@
 const newItemHandler = async (event) => {
     event.preventDefault();
 
-    const postTitle = document.querySelector('#post-title').value.trim();
-    const content = document.querySelector('#content').value.trim();
-    const url = document.querySelector('#url').value.trim();
+    const postTitle = document.querySelector('#item').value.trim();
+    const description = document.querySelector('#description').value.trim();
+    const url = document.querySelector('#image').value.trim();
     const price = document.querySelector('#price').value.trim();
-    const category = document.querySelector('#dropdownMenuButton').value.trim();
+    const category = document.querySelector('#category').value.trim();
 
-// need to get category_id and user_id before sending below data
-
-    if (postTitle && content && url && price && category) {
-      const response = await fetch('/api/item', {
+    // get category fk
+    let categoryFK = null;
+    await fetch('api/findCategory', {
         method: 'POST',
-        body: JSON.stringify({ postTitle, content, url, price, category }),
+        body: JSON.stringify({ category }),
+        headers: { 'Content-Type': 'application/json' },
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        categoryFK = data.id;
+    });
+
+    // get user id and balance fk
+    let seller_id_FK = null;
+    let seller_balance_FK = null;
+    await fetch('api/findUser', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        seller_id_FK = data.id;
+        seller_balance_FK = data.balance;
+    });
+
+    // create new post
+    if (seller_id_FK && seller_balance_FK && postTitle && price && category && url && description) {
+        const response = await fetch('api/post', {
+        method: 'POST',
+        body: JSON.stringify({ seller_id_FK, seller_balance_FK, postTitle, price, category, url, description }),
         headers: { 'Content-Type': 'application/json' },
       });
 
@@ -25,40 +53,26 @@ const newItemHandler = async (event) => {
     }
 };
 
-const categoryLoad = async (event) => {
-    event.preventDefault();
-
-    const response = await fetch('/api/categories', {
-        method: 'GET',
-        body: JSON.stringify({ category_name }),
-        headers: { 'Content-Type': 'application/json' }
-    });
-
-    if (response.ok) {
-        const dropDownMenu = document.querySelector('#dropdownMenuCategories');
-        for (var category in response.categories) {
-            let dropDownItem = document.createElement('button');
-            dropDownItem.class = "dropdown-item";
-            dropDownItem.type = "button";
-            dropDownItem.innerHTML = category;
+const categoryLoad = async () => {
+    console.log("LOADING CATEGORIES");
+    console.log("------------------");
+    await fetch('api/categories')
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        let categories = data;
+        const dropDownMenu = document.querySelector('#category');
+        for (let i = 0; i < categories.length; i++) {
+            let dropDownItem = document.createElement('option');
+            dropDownItem.innerHTML = categories[i].category_name;
             dropDownMenu.appendChild(dropDownItem);
         }
-    } else {
-        alert(response.statusText);
-    }
+    });
 }
 
-const updateDropdown = e => {
-    document.querySelector('#dropdownMenuButton').innerHTML = e.target.value;
-}
+window.onload = categoryLoad();
 
 document
-    .onload(categoryLoad);
-
-document
-    .querySelector('.new-post-form-form')
+    .querySelector('form')
     .addEventListener('submit', newItemHandler);
-
-document
-    .querySelector('.dropDownItem')
-    .addEventListener('click', updateDropdown);
