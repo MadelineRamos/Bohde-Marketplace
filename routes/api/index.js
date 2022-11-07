@@ -10,7 +10,6 @@ router.post('/post', PostController.post);
 router.post('/findUser', UserController.findUser);
 router.post('/findCategory', CategoryController.findCategory);
 
-
 router.get('/categories', CategoryController.categories);
 
 module.exports = router;

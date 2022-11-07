@@ -1,7 +1,7 @@
 const newItemHandler = async (event) => {
     event.preventDefault();
 
-    const postTitle = document.querySelector('#item').value.trim();
+    const title = document.querySelector('#item').value.trim();
     const description = document.querySelector('#description').value.trim();
     const url = document.querySelector('#image').value.trim();
     const price = document.querySelector('#price').value.trim();
@@ -33,14 +33,14 @@ const newItemHandler = async (event) => {
     })
     .then((data) => {
         seller_id_FK = data.id;
-        seller_balance_FK = data.balance;
+        seller_balance = data.balance;
     });
 
     // create new post
-    if (seller_id_FK && seller_balance_FK && postTitle && price && category && url && description) {
+    if (seller_id_FK && seller_balance && title && price && category && url && description) {
         const response = await fetch('api/post', {
         method: 'POST',
-        body: JSON.stringify({ seller_id_FK, seller_balance_FK, postTitle, price, category, url, description }),
+        body: JSON.stringify({ seller_id_FK, seller_balance, title, price, category, url, description }),
         headers: { 'Content-Type': 'application/json' },
       });
 
@@ -54,8 +54,6 @@ const newItemHandler = async (event) => {
 };
 
 const categoryLoad = async () => {
-    console.log("LOADING CATEGORIES");
-    console.log("------------------");
     await fetch('api/categories')
     .then((response) => {
         return response.json();
