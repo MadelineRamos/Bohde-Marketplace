@@ -7,5 +7,13 @@ module.exports = {
         isAuthenticated: req.session.isAuthenticated
       }
     );
+  },
+  newListing: (req, res) => {
+    res.render(
+      'new-post',
+      {
+        isAuthenticated: req.session.isAuthenticated
+      }
+    );
   }
 }

@@ -7,8 +7,8 @@ const { Category, Post, User } = require('../../models')
 // router.get all items
 // Item has become Post
 router.get('/', (req, res) => {
-    Item.findall({
-        attributes: ['id', 'title', 'price', 'category_id', 'discription', 'condition','user_id', 'image_url'],
+    Post.findall({
+        attributes: ['post_id','seller_id', 'title', 'price', 'category_id', 'image_url', 'description' ],
         include: [
             {
               model: Category,
@@ -16,21 +16,21 @@ router.get('/', (req, res) => {
             },
         ]
     })
-        .then(dbItemData => res.json(dbItemData))
+        .then(dbPostData => res.json(dbPostData))
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
         });
     });
 //router.get one item
-router.get('/:id', (req, res) => {
+router.get('/:post_id', (req, res) => {
     // find a single product by its `id`
     // be sure to include its associated Category and Tag data
-    Item.findOne({
+    Post.findOne({
       where: {
-        id: req.params.id
+        post_id: req.params.post_id
       },
-      attributes: ['id', 'title', 'price', 'category_id', 'discription', 'condition','user_id', 'image_url']
+      attributes: ['post_id','seller_id', 'title', 'price', 'category_id', 'image_url', 'description']
     })
       .then(dbProductData => {
         if (!dbProductData) {
@@ -48,9 +48,8 @@ router.get('/:id', (req, res) => {
 //new Post
 router.post('/', (req, res) => {
     Post.create({
-        post_id: req.body.id,
         user_id: req.body.user_id,
-        balance: req.body.balance,
+        seller_id: req.body.seller_id,
         title: req.body.title,
         price: req.body.price,
         category_id: req.body.category_id,
@@ -84,12 +83,12 @@ router.put('/:id', (req, res) => {
         }
     }
 )
-    .then(dbItemData => {
-        if (!dbItemData) {
+    .then(dbPostData => {
+        if (!dbPostData) {
             res.status(404).json({ message: 'No item found with this id'});
             return;
         }
-        res.json(dbItemData);
+        res.json(dbPostData);
     });
 });
 

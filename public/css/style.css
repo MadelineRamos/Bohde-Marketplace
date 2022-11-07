@@ -12,3 +12,11 @@ body {
   border: none;
   cursor: pointer;
 }
+
+.post {
+  padding: 20px;
+}
+
+.form-group {
+  padding-bottom: 10px;
+}

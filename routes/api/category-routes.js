@@ -12,7 +12,7 @@ router.get('/:id', (req, res) => {
         include: [
             {
                 model: Item,
-                attributes: ['id', 'title', 'price', 'category_id', 'discription', 'condition','user_id', 'image_url']
+                attributes: ['post_id','seller_id', 'title', 'price', 'category_id', 'image_url', 'description']
             }
         ]
     })
