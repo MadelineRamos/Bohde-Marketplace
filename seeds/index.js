@@ -11,12 +11,14 @@ const seedDatabase = async () => {
     individualHooks: true,
     returning: true,
   });
+  console.log('User Seeds Inserted');
   console.log('--------------');
 
   await Category.bulkCreate(categorySeeds, {
     individualHooks: true,
     returning: true,
   });
+  console.log('Category Seeds Inserted');
   console.log('--------------');
 
   process.exit(0);
