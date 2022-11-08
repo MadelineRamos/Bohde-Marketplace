@@ -7,6 +7,7 @@ const newItemHandler = async (event) => {
     const price = document.querySelector('#price').value.trim();
     const category = document.querySelector('#category').value.trim();
 
+
     // get category fk
     let category_id = null;
     await fetch('api/findCategory', {
@@ -35,10 +36,10 @@ const newItemHandler = async (event) => {
     });
 
     // create new post
-    if (seller_id && title && price && category_id && image_url && description) {
+    if (post_id && seller_id && title && price && category_id && image_url && description) {
         const response = await fetch('api/post', {
         method: 'POST',
-        body: JSON.stringify({ seller_id, title, price, category_id, image_url, description }),
+        body: JSON.stringify({ post_id, seller_id, title, price, category_id, image_url, description }),
         headers: { 'Content-Type': 'application/json' },
       });
 
