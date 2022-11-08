@@ -8,7 +8,7 @@ const newItemHandler = async (event) => {
     const category = document.querySelector('#category').value.trim();
 
     // get category fk
-    let category_id = null;
+    let category_name = null;
     await fetch('api/findCategory', {
         method: 'POST',
         body: JSON.stringify({ category }),
@@ -18,7 +18,7 @@ const newItemHandler = async (event) => {
         return response.json();
     })
     .then((data) => {
-        category_id = data.id;
+        category_name = data.id;
     });
 
     // get user id and balance fk
