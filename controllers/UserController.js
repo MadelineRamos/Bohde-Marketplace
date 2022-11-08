@@ -4,13 +4,14 @@ const { User } = require('../models');
 // CREATE new user
 module.exports = {
   register: async (req, res) => {
-    const { body: { firstName, lastName, email, password } } = req;
+    const { body: { firstName, lastName, email, password, balance } } = req;
     try {
       const user = await User.create({
         firstName,
         lastName,
         email,
-        password
+        password,
+        balance
       });
 
       delete user.password;
