@@ -22,6 +22,6 @@ Post.belongsTo(Category, {
 
 module.exports = {
   User,
-  Category,
-  Post
+  Post,
+  Category
 };

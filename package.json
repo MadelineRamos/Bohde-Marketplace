@@ -14,6 +14,7 @@
   "dependencies": {
     "animejs": "^3.2.1",
     "bcrypt": "^5.1.0",
+    "config": "^3.3.8",
     "connect-session-sequelize": "^7.1.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
@@ -24,5 +25,13 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MadelineRamos/Bohde-Marketplace.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MadelineRamos/Bohde-Marketplace/issues"
+  },
+  "homepage": "https://github.com/MadelineRamos/Bohde-Marketplace#readme"
 }
