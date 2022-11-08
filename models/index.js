@@ -1,4 +1,4 @@
-const { post } = require('../routes/api');
+// const { post } = require('../routes/api');
 const User = require('./User');
 const Category = require('./Category');
 const Post = require('./Post');

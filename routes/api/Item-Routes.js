@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { post } = require('.');
+// const { post } = require('.');
 const sequelize = require('../../db/config');
 const { Category, Post, User } = require('../../models')
 
@@ -7,7 +7,7 @@ const { Category, Post, User } = require('../../models')
 // router.get all items
 // Item has become Post
 router.get('/api/posts', (req, res) => {
-    Post.findall({
+    Post.findAll({
         attributes: ['post_id', 'seller_id', 'title', 'price', 'category_id', 'image_url', 'description'],
         include: [
             {
@@ -47,22 +47,18 @@ router.get('/:post_id', (req, res) => {
 
 //new Post
 router.post('/api/posts', (req, res) => {
+    console.log(req.body);
     Post.create({
-        user_id: req.body.user_id,
+        // user_id: req.body.user_id,
         seller_id: req.body.seller_id,
         title: req.body.title,
         price: req.body.price,
         category_id: req.body.category_id,
         image_url: req.body.image_url,
-        description: req.body.description,
-        include: [
-            {
-                model: User,
-                attributes: ["lastName", 'firstName'],
-            },
-        ]
+        description: req.body.description
     })
         .then((post) => {
+            console.log(post, "***")
             res.status(200).json(post);
         })
         .catch((err) => {
@@ -133,4 +129,4 @@ router.put('/:id', (req, res) => {
             });
 });
 
-// module.exports = router;
+module.exports = router;

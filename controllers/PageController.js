@@ -1,10 +1,16 @@
+const { Post } = require("../models");
+
 module.exports = {
-  getDashboard: (req, res) => {
+  getDashboard: async (req, res) => {
+    const dbPosts = await Post.findAll();
+    const posts = dbPosts.map(post => post.get({ plain: true }))
+    console.log(posts);
     res.render(
       'dashboard',
       {
         welcomeMessage: `Welcome to the dashboard ${req.session.currentUser.firstName}!`,
-        isAuthenticated: req.session.isAuthenticated
+        isAuthenticated: req.session.isAuthenticated,
+        posts
       }
     );
   },
