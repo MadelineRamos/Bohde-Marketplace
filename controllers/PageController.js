@@ -4,7 +4,6 @@ module.exports = {
   getDashboard: async (req, res) => {
     const dbPosts = await Post.findAll();
     const posts = dbPosts.map(post => post.get({ plain: true }))
-    console.log(posts);
     res.render(
       'dashboard',
       {

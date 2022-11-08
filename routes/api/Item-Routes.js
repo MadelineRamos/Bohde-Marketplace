@@ -47,7 +47,6 @@ router.get('/:post_id', (req, res) => {
 
 //new Post
 router.post('/api/posts', (req, res) => {
-    console.log(req.body);
     Post.create({
         // user_id: req.body.user_id,
         seller_id: req.body.seller_id,
@@ -58,7 +57,6 @@ router.post('/api/posts', (req, res) => {
         description: req.body.description
     })
         .then((post) => {
-            console.log(post, "***")
             res.status(200).json(post);
         })
         .catch((err) => {
