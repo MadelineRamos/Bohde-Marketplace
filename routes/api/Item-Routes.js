@@ -6,7 +6,7 @@ const { Category, Post, User } = require('../../models')
 
 // router.get all items
 // Item has become Post
-router.get('/', (req, res) => {
+router.get('/api/posts', (req, res) => {
     Post.findall({
         attributes: ['post_id','seller_id', 'title', 'price', 'category_id', 'image_url', 'description' ],
         include: [
@@ -46,7 +46,7 @@ router.get('/:post_id', (req, res) => {
   });
 
 //new Post
-router.post('/', (req, res) => {
+router.post('/api/posts', (req, res) => {
     Post.create({
         user_id: req.body.user_id,
         seller_id: req.body.seller_id,
@@ -62,8 +62,8 @@ router.post('/', (req, res) => {
               },
            ]
     })
-    .then((item) => {
-        res.status(200).json(item);
+    .then((post) => {
+        res.status(200).json(post);
     })
     .catch((err) => {
      console.log(err);
@@ -73,7 +73,7 @@ router.post('/', (req, res) => {
 
 //update item price 
 router.put('/:id', (req, res) => {
-    Item.update(
+    Post.update(
         {
         price: req.body.price
         },
