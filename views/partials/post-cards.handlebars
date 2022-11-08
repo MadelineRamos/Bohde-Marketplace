@@ -1,13 +1,14 @@
 <article class="post">
   <div class="title">
-    <a href="/post/{{post_id}}">{{title}}</a>
-    <span>{{price}}</span>
+    <a href="/post/{{post_id}}" class="post-title">{{title}}</a>
+    <span class="price">{{price}}</span>
   </div>
   <div class="meta">
     <img src="{{image_url}}">
+    <span class="description">{{description}}</span>
     |
-    Listed by {{seller_id}} {{lastName}} on {{created_at}}
+    Listed by {{user.firstName}} {{user.lastName}} on {{created_at}}
   </div>
-  <button type="button" class="add-to-cart-btn">Add to cart</button>
   <button type="button" class="buy-now-btn">Buy now</button>
 </article>
+<script src="/js/purchase.js"></script>
