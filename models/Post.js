@@ -14,18 +14,12 @@ Post.init(
     },
     //from user
     seller_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
             model: "user",
             key: "id",
-        }
-    },
-    balance: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: "user",
-            key: "balance",
-        }
+        },
+        allowNull: false,
     },
     title: {
         type: DataTypes.STRING,
@@ -35,12 +29,14 @@ Post.init(
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    // from category
     category_id: {
         type: DataTypes.INTEGER,
         references: {
-        model: "category",
-        key: "id",
+            model: "category",
+            key: "id",
         },
+        allowNull: false,
     },
     image_url: {
         type: DataTypes.STRING,
