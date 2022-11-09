@@ -1,15 +1,13 @@
-{{#each post}}
-<article class="post">
-  <div class="title">
-    <a href="/post/{{post_id}}">{{title}}</a>
-    <span>{{price}}</span>
+<div class="card post col-3" id="post-card" style="width: 18rem;">
+  <img src="{{image_url}}" class="card-img-top" />
+  <div class="card-body meta">
+    <a href="/post/{{post_id}}" class="card-title">{{title}}</a>
+
+    <span class="price">${{price}}</span>
+    <span class="description">Description: {{description}}</span>
+    <span class="listed-by">Listed by {{user.firstName}} {{user.lastName}}</span>
+
   </div>
-  <div class="meta">
-    <img src="{{image_url}}">
-    |
-    Listed by {{user.username}} on {{format_date created_at}}
-  </div>
-  <button type="button" class="add-to-cart-btn">Add to cart</button>
-  <button type="button" class="buy-now-btn">Buy now</button>
-</article>
-{{/each}}
+  <button type="button" class="buy-now-btn btn btn-primary" id="buy-now">Buy now</button>
+</div>
+<script src="/js/purchase.js"></script>

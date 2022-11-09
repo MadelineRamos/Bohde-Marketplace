@@ -14,7 +14,7 @@ const loginFormHandler = async (event) => {
       document.location.replace('/');
     } else {
       const { message } = await response.json();
-      showToast({ message });
+      showToast({ message: 'Unable to login.' });
     }
   }
 };

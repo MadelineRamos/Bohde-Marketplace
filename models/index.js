@@ -1,4 +1,3 @@
-const { post } = require('../routes/api');
 const User = require('./User');
 const Category = require('./Category');
 const Post = require('./Post');
@@ -23,6 +22,6 @@ Post.belongsTo(Category, {
 
 module.exports = {
   User,
-  Category,
-  Post
+  Post,
+  Category
 };
