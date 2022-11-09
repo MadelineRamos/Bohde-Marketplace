@@ -48,7 +48,7 @@ const newItemHandler = async (event) => {
             document.location.replace('/');
         } else {
             const { message } = await response.json();
-            showToast({ message });
+            showToast({ message: 'Problem listing item.' });
         }
     }
 };
