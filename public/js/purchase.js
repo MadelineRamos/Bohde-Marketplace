@@ -1,8 +1,8 @@
 async function buyNow(event) {
     event.preventDefault();
 
-    let post_id = document.querySelector('.post-title').href.toString().split('/')[
-        document.querySelector('.post-title').href.toString().split('/').length - 1
+    let post_id = document.querySelector('.card-title').href.toString().split('/')[
+        document.querySelector('.card-title').href.toString().split('/').length - 1
     ];
 
     const response = await fetch(`api/posts/transactions/${post_id}`, {
@@ -15,18 +15,14 @@ async function buyNow(event) {
         }
     });
 
-    async (req, res) => {
-        try {
-            res.json(req.session.currentUser);
-        } catch (err) {
-            console.log(err);
-            res.status(500).json(err);
-        }
-    };
+    let userBalanceEl = document.querySelector('.user-balance').textContent.split('$')[
+        document.querySelector('.user-balance').textContent.split('$').length - 1
+    ];
 
     if (response.ok) {
-        document.location.reload();
-
+        console.log('userbalance ***', userBalanceEl);
+        // console.log('userBalanceAfterPurchase***', userBalanceAfterPurchase)
+        // document.location.reload();
     } else {
         alert(response.statusText)
     }

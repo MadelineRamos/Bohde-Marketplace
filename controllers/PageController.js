@@ -3,7 +3,6 @@ const { Post, User } = require("../models");
 module.exports = {
   getDashboard: async (req, res) => {
     const user = req.session.currentUser;
-    console.log(user);
     const dbPosts = await Post.findAll({
       attributes: [
         'post_id',
