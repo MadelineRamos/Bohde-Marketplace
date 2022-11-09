@@ -74,15 +74,10 @@ module.exports = {
 
   findUser: async (req, res) => {
     try {
-      const currUser = req.session.currentUser;
-      // const user = await User.findOne({
-      //   where: { email: currUser },
-      //   attributes: { exclude: ['createdAt, updatedAt'] },
-      // });
-      res.json(currUser);
+      res.json(req.session.currentUser);
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
     }
   }
-}
+};
