@@ -12,7 +12,8 @@ module.exports = {
         'price',
         'category_id',
         'image_url',
-        'description'],
+        'description',
+      ],
       include: [
         {
           model: User,

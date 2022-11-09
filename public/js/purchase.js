@@ -5,9 +5,6 @@ async function buyNow(event) {
         document.querySelector('.post-title').href.toString().split('/').length - 1
     ];
 
-    // subtract price of item from user balance
-    let price = document.querySelector('.price').textContent;
-
     const response = await fetch(`api/posts/transactions/${post_id}`, {
         method: 'PUT',
         body: JSON.stringify({

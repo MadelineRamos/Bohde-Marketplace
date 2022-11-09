@@ -1,14 +1,16 @@
-<article class="post">
-  <div class="title">
-    <a href="/post/{{post_id}}" class="post-title">{{title}}</a>
-    <span class="price">{{price}}</span>
-  </div>
-  <div class="meta">
-    <img src="{{image_url}}">
-    <span class="description">{{description}}</span>
+<div class="card post" style="width: 18rem;">
+  <img src="{{image_url}}" class="card-img-top" />
+  <div class="card-body meta">
+    <a href="/post/{{post_id}}" class="card-title">{{title}}</a>
+
+    <span class="price">${{price}}</span>
+    <span class="description">Description: {{description}}</span>
+    | Listed by
+    {{user.firstName}}
+    {{user.lastName}}
     |
-    Listed by {{user.firstName}} {{user.lastName}} on {{created_at}}
+    {{created_at}}
   </div>
-  <button type="button" class="buy-now-btn">Buy now</button>
-</article>
+  <button type="button" class="buy-now-btn btn btn-primary">Buy now</button>
+</div>
 <script src="/js/purchase.js"></script>

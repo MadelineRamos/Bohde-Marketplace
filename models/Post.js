@@ -43,8 +43,7 @@ Post.init(
         },
         description: {
             type: DataTypes.STRING,
-        },
-
+        }
     },
     {
         sequelize,
