@@ -1,16 +1,13 @@
-<div class="card post" style="width: 18rem;">
+<div class="card post col-3" id="post-card" style="width: 18rem;">
   <img src="{{image_url}}" class="card-img-top" />
   <div class="card-body meta">
     <a href="/post/{{post_id}}" class="card-title">{{title}}</a>
 
     <span class="price">${{price}}</span>
     <span class="description">Description: {{description}}</span>
-    | Listed by
-    {{user.firstName}}
-    {{user.lastName}}
-    |
-    {{created_at}}
+    <span class="listed-by">Listed by {{user.firstName}} {{user.lastName}}</span>
+
   </div>
-  <button type="button" class="buy-now-btn btn btn-primary">Buy now</button>
+  <button type="button" class="buy-now-btn btn btn-primary" id="buy-now">Buy now</button>
 </div>
 <script src="/js/purchase.js"></script>

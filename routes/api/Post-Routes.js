@@ -162,7 +162,7 @@ router.put("/transactions/:post_id", async (req, res) => {
             },
         });
 
-        res.send({ userBalanceAfterPurchase });
+        res.json({ message: 'Transaction successful' });
 
     } catch (err) {
         console.log(err);
