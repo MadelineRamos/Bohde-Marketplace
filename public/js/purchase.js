@@ -15,14 +15,22 @@ async function buyNow(event) {
         }
     });
 
-    let userBalanceEl = document.querySelector('.user-balance').textContent.split('$')[
-        document.querySelector('.user-balance').textContent.split('$').length - 1
-    ];
+    // trying to get updated user balance
+    await fetch('api/findUser', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+    })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            console.log('data', data);
+        });
 
     if (response.ok) {
-        console.log('userbalance ***', userBalanceEl);
         // console.log('userBalanceAfterPurchase***', userBalanceAfterPurchase)
-        // document.location.reload();
+        document.querySelector('.user-balance').textContent = `Your Balance: ${userBalanceAfterPurchase}`;
+        document.location.reload();
     } else {
         alert(response.statusText)
     }
