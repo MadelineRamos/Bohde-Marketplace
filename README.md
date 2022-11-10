@@ -2,8 +2,8 @@
 
 ## Screenshots
 
-![Login](..//Bohde-Marketplace/public/images/localhost_3001_login.png)
-![Create new posting](..//Bohde-Marketplace/public/images/localhost_3001_new-listing.png)
+![Login](../Bohde-Marketplace/public/images/localhost_3001_login.png)
+![Create new posting](../Bohde-Marketplace/public/images/localhost_3001_new-listing.png)
 
 ## Purpose
 
