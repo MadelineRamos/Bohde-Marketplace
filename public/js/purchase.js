@@ -1,43 +1,20 @@
 async function buyNow(event) {
-    event.preventDefault();
+  event.preventDefault();
 
-    console.log(event.target.id);
+  const post_id = event.target.dataset.id;
+  const response = await fetch(`api/posts/transactions/${post_id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ post_id }),
+  });
+  const formattedResponse = await response.json();
 
-    if (event.target.id = 'buy-now') {
-        let post_id = await event.target.parentElement.querySelector('.card-title').href.toString().split('/')[
-            event.target.parentElement.querySelector('.card-title').href.toString().split('/').length - 1
-        ];
+  if (response.ok) {
+    showToast({ message: formattedResponse.message });
+    document.querySelector('.user-balance').textContent = `Your Balance: $${formattedResponse.userBalanceAfterPurchase}`;
+  } else {
+    showToast({ message: formattedResponse.message });
+  }
+}
 
-        const response = await fetch(`api/posts/transactions/${post_id}`, {
-            method: 'PUT',
-            body: JSON.stringify({
-                post_id: post_id
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-
-
-        // trying to get updated user balance
-        await fetch('api/findUser', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-        })
-            .then((response) => {
-                return response.json();
-            })
-            .then(data => console.log(data.userBalanceAfterPurchase))
-
-
-        if (response.ok) {
-            // console.log('userBalanceAfterPurchase***', userBalanceAfterPurchase)
-            // document.querySelector('.user-balance').textContent = `Your Balance: ${userBalanceAfterPurchase}`;
-            document.location.reload();
-        } else {
-            alert(response.statusText)
-        }
-    }
-};
-
-document.querySelector('.card-container').addEventListener('click', buyNow);
+document.querySelectorAll('.buy-now-btn').forEach(button => button.addEventListener('click', buyNow));
