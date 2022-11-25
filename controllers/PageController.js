@@ -20,7 +20,7 @@ module.exports = {
         }
       ]
     });
-    const posts = dbPosts.map(post => post.get({ plain: true }))
+    const posts = dbPosts.map(post => post.get({ plain: true }));
     res.render(
       'dashboard',
       {
@@ -31,6 +31,43 @@ module.exports = {
       }
     );
   },
+
+  getSinglePost: async (req, res) => {
+    Post.findOne({
+      where: {
+        post_id: req.params.id
+      },
+      attributes: [
+        'post_id',
+        'seller_id',
+        'title',
+        'price',
+        'image_url',
+        'description',
+        'category_id',
+        'created_at'
+      ]
+    })
+      .then(dbPostData => {
+        if (!dbPostData) {
+          res.status(404).json({ message: 'No post found with this id' });
+          return;
+        }
+
+        const post = dbPostData.get({ plain: true });
+
+        res.render('single-post', {
+          post,
+          isAuthenticated: req.session.isAuthenticated,
+          currentUser: req.session.currentUser
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  },
+
   newListing: async (req, res) => {
     const user = req.session.currentUser;
 
@@ -42,4 +79,4 @@ module.exports = {
       }
     );
   }
-}
+};

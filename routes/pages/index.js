@@ -9,6 +9,7 @@ router.get('/login', (req, res) => res.render('login'));
 
 // Pages with data
 router.get('/', isAuthenticated, PageController.getDashboard);
+router.get('/post/:id', isAuthenticated, PageController.getSinglePost);
 router.get('/new-listing', isAuthenticated, PageController.newListing);
 
 module.exports = router;
