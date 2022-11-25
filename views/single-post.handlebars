@@ -1,19 +1,20 @@
-<article class="post">
-  <div class="title">
-    <a href="/post/{{post_id}}">{{title}}</a>
-    <span>{{price}}</span>
-    <p>Listed by {{user.username}} on {{format_date created_at}}</p>
-  </div>
-  <div class="meta">
-    <p>Photos:</p>
-    <img src="{{image_url}}" />
-    |
-    <span>Description: {{description}}</span>
-  </div>
-  {{#if loggedIn}}
-  <div class="buy-btns">
-    <button type="button" class="buy-now-btn">Buy now</button>
-  </div>
-  {{/if}}
-</article>
-<script src="#"></script>
+<div class="container">
+  <article class="card post col-3" style="width:18rem;margin: 2rem auto;">
+    <div class=" title">
+      <a href="/post/{{post.post_id}}">{{post.title}}</a>
+      <span>{{price}}</span>
+      <p>Listed by {{currentUser.firstName}} {{ currentUser.lastName}} on {{ post.created_at}}</p>
+    </div>
+    <div class="meta">
+      <p>Photos:</p>
+      <img src="{{post.image_url}}" />
+      |
+      <span>Description: {{post.description}}</span>
+    </div>
+    {{#if isAuthenticated}}
+    <div class="buy-btns">
+      <button type="button" class="buy-now-btn">Buy now</button>
+    </div>
+    {{/if}}
+  </article>
+</div>
